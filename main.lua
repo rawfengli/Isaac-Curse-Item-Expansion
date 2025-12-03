@@ -1,4 +1,4 @@
-local mod = RegisterMod("MyMode", 1)
+local mod = RegisterMod("Isaac-Curse-Item-Expansion", 1)
 
 local tools = require("toolclass")
 
