@@ -1,0 +1,6 @@
+<items gfxroot="gfx/items/" version="1">
+    <passive description="The Eternal Curse Of The Unknown" gfx="Unknown_Curse.png" name="Unknown Curse" id="0" quality = "3"/>
+    <passive description="The Eternal Curse Of Blind" gfx="Blind_Curse.png" name="Blind Curse" id="1" quality = "3"
+    cache = "all"/>
+    
+</items>
