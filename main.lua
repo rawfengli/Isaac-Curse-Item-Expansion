@@ -1,6 +1,11 @@
-local mod = RegisterMod("Isaac-Curse-Item-Expansion", 1)
+Curse_Item_Mod = RegisterMod("Isaac Curse Item Expansion", 1)
 
-local tools = require("toolclass")
+--加载lib等文件
+local function IncludeFile(filePath)
+    require(filePath)
+end
+
+IncludeFile("sprites.commons.lib.lib")
 
 local Unknown_Curse_ID = Isaac.GetItemIdByName("Unknown Curse")
 local Blind_Curse_ID = Isaac.GetItemIdByName("Blind Curse")
@@ -8,7 +13,7 @@ local Blind_Curse_ID = Isaac.GetItemIdByName("Blind Curse")
 -- The Unknown Curse Item Function
 local Unknown_Curse_Item_BlackHeartNum = 2
 
-function mod:UnknownCurseItemPostNewlevel()
+function Curse_Item_Mod:UnknownCurseItemPostNewlevel()
     local player = Isaac.GetPlayer(0)
     if player:HasCollectible(Unknown_Curse_ID) then
 
@@ -20,7 +25,7 @@ function mod:UnknownCurseItemPostNewlevel()
     end 
 end
 
-function mod:UnknownCurseItemPostNewRoom()
+function Curse_Item_Mod:UnknownCurseItemPostNewRoom()
     local player = Isaac.GetPlayer(0)
 
     if player:HasCollectible(Unknown_Curse_ID) then
@@ -34,8 +39,8 @@ function mod:UnknownCurseItemPostNewRoom()
     end 
 end
 
-mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, mod.UnknownCurseItemPostNewlevel)
-mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, mod.UnknownCurseItemPostNewRoom)
+Curse_Item_Mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, Curse_Item_Mod.UnknownCurseItemPostNewlevel)
+Curse_Item_Mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, Curse_Item_Mod.UnknownCurseItemPostNewRoom)
 
 -- end
 
@@ -44,13 +49,13 @@ mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, mod.UnknownCurseItemPostNewRoom)
 local Blind_Curse_Item_Damage = 0.16
 local Blind_Curse_Item_Tears = 0.10
 local Blind_Curse_Item_Luck = 0.1
-function mod:ReEvaluateItems()
+function Curse_Item_Mod:ReEvaluateItems()
     local player = Isaac.GetPlayer()
     player:AddCacheFlags(CacheFlag.CACHE_ALL)
     player:EvaluateItems()
 end
 
-function mod:BlindCurseItemEvaluateCache(player, cacheFlags)
+function Curse_Item_Mod:BlindCurseItemEvaluateCache(player, cacheFlags)
     if player:HasCollectible(Blind_Curse_ID) then
         local collectibleCount = player:GetCollectibleCount()
         -- DamageFlags
@@ -60,11 +65,9 @@ function mod:BlindCurseItemEvaluateCache(player, cacheFlags)
         -- TearsFlags
         if cacheFlags & CacheFlag.CACHE_FIREDELAY == CacheFlag.CACHE_FIREDELAY then
 
-            local originalFireDelay = player.MaxFireDelay
-            local originalTears = 30 / (originalFireDelay + 1)
-            local currentTears = originalTears + collectibleCount * Blind_Curse_Item_Tears
-            local currentFireDelay = 30 / currentTears - 1
-            player.MaxFireDelay = currentFireDelay
+            local AddTears = collectibleCount * Blind_Curse_Item_Tears
+            local AddMaxFireDelay = Curse_Item_Mod.Lib["Tears"]:ModifyTears(AddTears, player)
+            player.MaxFireDelay = player.MaxFireDelay + AddMaxFireDelay
         end
         -- LuckFlags
         if cacheFlags & CacheFlag.CACHE_LUCK == CacheFlag.CACHE_LUCK then
@@ -73,7 +76,7 @@ function mod:BlindCurseItemEvaluateCache(player, cacheFlags)
     end
 end
 
-function mod:BlindCurseItemPostNewRoom()
+function Curse_Item_Mod:BlindCurseItemPostNewRoom()
     local player = Isaac.GetPlayer(0)
     if player:HasCollectible(Blind_Curse_ID) then
 
@@ -84,9 +87,8 @@ function mod:BlindCurseItemPostNewRoom()
     end 
 end
 
-function mod:BlindCurseItemPostNewLevel()
+function Curse_Item_Mod:BlindCurseItemPostNewLevel()
     local player = Isaac.GetPlayer(0)
-
     if player:HasCollectible(Blind_Curse_ID) then
 
         local level = Game():GetLevel()
@@ -96,8 +98,8 @@ function mod:BlindCurseItemPostNewLevel()
     end   
 end
 
-mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.BlindCurseItemEvaluateCache)
-mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, mod.BlindCurseItemPostNewLevel)
-mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, mod.BlindCurseItemPostNewRoom);
-mod:AddCallback(ModCallbacks.MC_POST_UPDATE, mod.ReEvaluateItems)
+Curse_Item_Mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, Curse_Item_Mod.BlindCurseItemEvaluateCache)
+Curse_Item_Mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, Curse_Item_Mod.BlindCurseItemPostNewLevel)
+Curse_Item_Mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, Curse_Item_Mod.BlindCurseItemPostNewRoom);
+Curse_Item_Mod:AddCallback(ModCallbacks.MC_POST_UPDATE, Curse_Item_Mod.ReEvaluateItems)
 --end
