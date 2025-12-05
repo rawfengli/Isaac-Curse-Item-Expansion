@@ -1,0 +1,18 @@
+<ItemPools>
+    <Pool Name="secret">
+        <Item Name="Unknown Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Lost Option Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+    <Pool Name="redChest">
+        <Item Name="Unknown Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Lost Option Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+	<Pool Name="demonBeggar">
+        <Item Name="Unknown Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Lost Option Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool>
+	<Pool Name="curse">
+        <Item Name="Unknown Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Lost Option Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    </Pool> 
+</ItemPools>
