@@ -1,4 +1,4 @@
-local mod = RegisterMod("Isaac Curse Item Expansion", 1)
+Curse_Item_Mod = RegisterMod("Isaac-Curse-Item-Expansion", 1)
 
 --加载lib等文件
 local function IncludeFile(filePath)
