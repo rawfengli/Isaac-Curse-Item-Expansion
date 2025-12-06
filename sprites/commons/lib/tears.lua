@@ -1,6 +1,7 @@
 local Tears = {}
 
-local damageMultiplier = {
+--受限于技术原因，溢泪症,肾结石,D8没法实现
+local tearsMultiplier = {
     -- 眼药水
     function (t, player)
         local res = t
@@ -151,8 +152,17 @@ local damageMultiplier = {
         end
         return res
     end,
-    --
---补一个 34修正
+    --如果【攻击方式是硫磺火】且【没有 硫磺火】且【【人物是阿撒泻勒阿撒泻勒】或【有 阿撒泻勒的残角【临时】】】
+    function (t, player)
+        local effects = player:GetEffects()
+        local res = t
+        if  player:HasWeaponType(WeaponType.WEAPON_BRIMSTONE) and 
+            player:HasCollectible(CollectibleType.COLLECTIBLE_BRIMSTONE) ~= true and
+            (player:GetPlayerType() == PlayerType.PLAYER_AZAZEL or effects:HasTrinketEffect(TrinketType.TRINKET_AZAZELS_STUMP)) then
+            res = res * 0.8
+        end
+        return res
+    end,
     function (t, player)--科技2
         local res = t
         local Adjustment_Technology2 = 2 / 3
@@ -161,8 +171,17 @@ local damageMultiplier = {
         end
         return res
     end,
--- 补一个里亚娃
-    function (t, player)--睫毛膏
+    --里亚娃
+    function (t, player)
+        local res = t
+        local Adjustment_Eve_B = 2 / 3
+        if player:GetPlayerType() == PlayerType.PLAYER_EVE_B then
+            res = res * Adjustment_Eve_B
+        end
+        return res
+    end,
+    --睫毛膏
+    function (t, player)
         local res = t
         local Adjustment_Eves_Mascara = 2 / 3
         if player:HasCollectible(CollectibleType.COLLECTIBLE_EVES_MASCARA) then
@@ -170,15 +189,65 @@ local damageMultiplier = {
         end
         return res
     end,
-    --攻击方式为萌肺
+    --萌肺相关
     function (t, player)
         local res = t
         local Adjustment_Lung = 10 / 43
+        local Adjustment_LASER_Lung = 10 / 31 
         if player:HasWeaponType(WeaponType.WEAPON_MONSTROS_LUNGS) then
             res = res * Adjustment_Lung
+        else 
+            if player:HasWeaponType(WeaponType.WEAPON_LASER) and 
+            player:HasCollectible(CollectibleType.COLLECTIBLE_MONSTROS_LUNG) then
+                res= res * Adjustment_LASER_Lung
+            end
         end
         return res
-    end
+    end,
+    --杏仁奶与豆奶
+    function (t, player) 
+        local res = t
+        local Adjustment_Almond_Milk = 4
+        local Adjustment_Soy_Milk = 5.5
+        if player:HasCollectible(CollectibleType.COLLECTIBLE_ALMOND_MILK) then
+            res = res * Adjustment_Almond_Milk 
+        else
+            if player:HasCollectible(CollectibleType.COLLECTIBLE_SOY_MILK) then
+                res = res * Adjustment_Soy_Milk
+            end
+        end
+        return res
+    end,
+    --伯列恒之星 计算公式参考的愚昧mod
+    function (t, player)
+        local res = t
+        for _, entity in ipairs(Isaac.FindByType(EntityType.ENTITY_EFFECT, EffectVariant.HALLOWED_GROUND)) do
+			local playerPos = entity.Position + (player.Position - entity.Position) * Vector(1 /entity.SpriteScale.X, 1 /entity.SpriteScale.Y)
+			if (entity.Position:Distance(playerPos) < 80) then
+				res = res * 2.5
+				break
+			end
+		end
+        return res
+    end,
+    --倒战车与 飞头和犹大长子权兼容
+    function (t, player)
+        local res = t
+        local effects = player:GetEffects()
+        local Adjustment_Reverse_Chariot = 4.0
+        local Adjustment_Birthright = 3 
+        if effects:HasNullEffect(NullItemID.ID_REVERSE_CHARIOT) then
+            res = res * Adjustment_Reverse_Chariot
+        else    
+            if player:GetPlayerType() == PlayerType.PLAYER_JUDAS and 
+            player:HasCollectible(CollectibleType.COLLECTIBLE_BIRTHRIGHT) then
+                res = res * Adjustment_Birthright
+            end
+        end
+        return res
+    end,
+    --D8
+    --天秤
 }
 
 function Tears:FromMaxFireDelayToTears(maxFireDelay)-- T = 30/(d+1)
@@ -193,7 +262,7 @@ end
 
 function Tears:CalculateTears(t, player)--用于计算tear的乘区修正
     local result = t
-    for __, func in ipairs(damageMultiplier) do -- 通过已封装好的函数计算t的最终值
+    for __, func in ipairs(tearsMultiplier) do -- 通过已封装好的函数计算t的最终值
         result = func(result, player)
     end
     return result -- return maxfiresdelay
