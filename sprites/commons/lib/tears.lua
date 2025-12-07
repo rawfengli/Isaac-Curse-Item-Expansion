@@ -1,6 +1,8 @@
 local Tears = {}
 
 --受限于技术原因，溢泪症,肾结石,D8没法实现
+
+--原版忏悔+射速倍率修正
 local tearsMultiplier = {
     -- 眼药水
     function (t, player)
@@ -265,7 +267,7 @@ function Tears:CalculateTears(t, player)--用于计算tear的乘区修正
     for __, func in ipairs(tearsMultiplier) do -- 通过已封装好的函数计算t的最终值
         result = func(result, player)
     end
-    return result -- return maxfiresdelay
+    return result -- return ModifyTears
 end 
 
 function Tears:ModifyTears(tearsValue, player)-- 计算增加 当addTear = x 后 转换 为 MaxFireDelay 的修正值
@@ -279,7 +281,7 @@ function Tears:ModifyMaxFireDelay()
     
 end
 
-function Tears:Modifyt()
+function Tears:Modifyt()--对小t的修正
     
 end
 

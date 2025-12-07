@@ -5,6 +5,7 @@ local function IncludeSubLib(key, path)
 end
 
 IncludeSubLib("Tears", "tears")
+IncludeSubLib("Damage", "damage")
 
 
 

@@ -1,4 +1,4 @@
-local mod = RegisterMod("Isaac-Curse-Item-Expansion", 1)
+Curse_Item_Mod = RegisterMod("Isaac-Curse-Item-Expansion", 1)
 
 --加载lib等文件
 local function IncludeFile(filePath)
@@ -6,6 +6,7 @@ local function IncludeFile(filePath)
 end
 
 IncludeFile("sprites.commons.lib.lib")
+IncludeFile("sprites.commons.Room")
 
 local Unknown_Curse_ID = Isaac.GetItemIdByName("Unknown Curse")
 local Blind_Curse_ID = Isaac.GetItemIdByName("Blind Curse")
@@ -53,6 +54,7 @@ function Curse_Item_Mod:ReEvaluateItems()
     local player = Isaac.GetPlayer()
     player:AddCacheFlags(CacheFlag.CACHE_ALL)
     player:EvaluateItems()
+
 end
 
 function Curse_Item_Mod:BlindCurseItemEvaluateCache(player, cacheFlags)
@@ -60,7 +62,9 @@ function Curse_Item_Mod:BlindCurseItemEvaluateCache(player, cacheFlags)
         local collectibleCount = player:GetCollectibleCount()
         -- DamageFlags
         if cacheFlags & CacheFlag.CACHE_DAMAGE == CacheFlag.CACHE_DAMAGE then
-            player.Damage = player.Damage + collectibleCount * Blind_Curse_Item_Damage
+            local AddDamage = collectibleCount * Blind_Curse_Item_Damage
+            AddDamage = Curse_Item_Mod.Lib["Damage"]:ModifyDirectDamage(AddDamage, player)
+            player.Damage = player.Damage + AddDamage
         end
         -- TearsFlags
         if cacheFlags & CacheFlag.CACHE_FIREDELAY == CacheFlag.CACHE_FIREDELAY then
@@ -78,8 +82,8 @@ end
 
 function Curse_Item_Mod:BlindCurseItemPostNewRoom()
     local player = Isaac.GetPlayer(0)
-    if player:HasCollectible(Blind_Curse_ID) then
 
+    if player:HasCollectible(Blind_Curse_ID) then
         local level = Game():GetLevel()
         local showName = false
         level:AddCurse(LevelCurse.CURSE_OF_BLIND, showName)
