@@ -12,17 +12,24 @@ local Unknown_Curse_ID = Isaac.GetItemIdByName("Unknown Curse")
 local Blind_Curse_ID = Isaac.GetItemIdByName("Blind Curse")
 
 -- The Unknown Curse Item Function
-local Unknown_Curse_Item_BlackHeartNum = 2
+local Unknown_Curse_Item_BlackHeartCount1 = 1
+local Unknown_Curse_Item_BlackHeartCount2 = 2
 
 function Curse_Item_Mod:UnknownCurseItemPostNewlevel()
     local player = Isaac.GetPlayer(0)
     if player:HasCollectible(Unknown_Curse_ID) then
-
         local level = Game():GetLevel()
         local showName = false
         level:AddCurse(LevelCurse.CURSE_OF_THE_UNKNOWN, showName)
 
-        player:AddBlackHearts(Unknown_Curse_Item_BlackHeartNum)
+        local heartCount = player:GetHearts() + player:GetSoulHearts() + player:GetBoneHearts()
+        if heartCount <= 10 then
+            player:AddBlackHearts(Unknown_Curse_Item_BlackHeartCount2)
+        else 
+            if player:GetSoulHearts() == 0 then
+                player:AddBlackHearts(Unknown_Curse_Item_BlackHeartCount1);
+            end
+        end
     end 
 end
 
