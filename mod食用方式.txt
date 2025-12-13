@@ -1,0 +1,2 @@
+将该mod的文件放到
+The Binding of Isaac Rebirth\mods目录下进入游戏启用即可

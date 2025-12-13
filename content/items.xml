@@ -1,6 +1,6 @@
 <items gfxroot="gfx/items/" version="1">
     <passive description="The Eternal Curse Of The Unknown" gfx="Unknown_Curse.png" name="Unknown Curse" id="0" quality="3"/>
-    <passive description="The Eternal Curse Of Blind" gfx="Blind_Curse.png" name="Blind Curse" id="1" quality="3" cache="all"/>
+    <passive description="The Eternal Curse Of The Blind" gfx="Blind_Curse.png" name="Blind Curse" id="1" quality="3" cache="all"/>
     <passive description="Take Pills Anytime!" gfx="Portable_Pill.png" name="Portable Pill" id="2" quality="1"/>
-    
+    <passive description="The Eternal Curse Of The Lost" gfx="Lost_Curse.png" name="Lost Curse" id="3" quality="3"/>
 </items>

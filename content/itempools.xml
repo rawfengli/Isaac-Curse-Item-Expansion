@@ -1,34 +1,37 @@
 <ItemPools>
     <Pool Name="treasure">
-        <Item Name="Portable_Pill" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Portable Pill" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <!-- 宝箱房 -->
     <Pool Name="shop">
-        <Item Name="Portable_Pill" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Portable Pill" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <!-- 商店 -->
     <Pool Name="beggar">
-        <Item Name="Portable_Pill" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Portable Pill" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <!-- 乞丐小孩 -->
     <Pool Name="secret">
         <Item Name="Unknown Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
-        <Item Name="Lost Option Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Blind Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <!-- 隐藏房 -->
     <Pool Name="redChest">
         <Item Name="Unknown Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
-        <Item Name="Lost Option Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Blind Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Lost Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <!-- 红箱子 -->
 	<Pool Name="demonBeggar">
         <Item Name="Unknown Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
-        <Item Name="Lost Option Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Blind Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Lost Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool>
     <!-- 恶魔小孩 -->
 	<Pool Name="curse">
         <Item Name="Unknown Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
-        <Item Name="Lost Option Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Blind Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+        <Item Name="Lost Curse" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
     </Pool> 
     <!-- 刺房/诅咒房 -->
 </ItemPools>
