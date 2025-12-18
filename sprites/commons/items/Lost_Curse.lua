@@ -6,7 +6,7 @@ function Curse_Item_Mod:OpenRedRoom()
     if player:HasCollectible(Lost_Curse_ID) then
         local rng = player:GetCollectibleRNG(Lost_Curse_ID)
         local chance = rng:RandomInt(100)
-        if chance < 40 then
+        if chance < 60 then
             player:UseCard(Card.CARD_SOUL_CAIN)
         end
     end
