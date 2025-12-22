@@ -3,4 +3,5 @@
     <passive description="The Eternal Curse Of The Blind" gfx="Blind_Curse.png" name="Blind Curse" id="1" quality="3" cache="all"/>
     <passive description="Take Pills Anytime!" gfx="Portable_Pill.png" name="Portable Pill" id="2" quality="1"/>
     <passive description="The Eternal Curse Of The Lost" gfx="Lost_Curse.png" name="Lost Curse" id="3" quality="3"/>
+    <active maxcharges="2" description="The Eternal Curse Of The Maze" gfx="Maze_Curse.png" name="Maze Curse" id="4" quality="0" cache="damage"/>
 </items>

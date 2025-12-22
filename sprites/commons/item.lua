@@ -15,9 +15,11 @@ AddItemID("Blind Curse")
 AddItemID("Unknown Curse")
 AddItemID("Portable Pill")
 AddItemID("Lost Curse")
+AddItemID("Maze Curse")
 
 AddItemFile("Blind_Curse")
 AddItemFile("Unknown_Curse")
 AddItemFile("Portable_Pill")
 AddItemFile("Lost_Curse")
+AddItemFile("Maze_Curse")
 
