@@ -5,6 +5,8 @@ local function IncludeFile(filePath)
     require(filePath)
 end
 
-IncludeFile("sprites.commons.lib")
-IncludeFile("sprites.commons.room")
-IncludeFile("sprites.commons.item")
+IncludeFile("ci_sprites.callback")
+IncludeFile("ci_sprites.lib")
+IncludeFile("ci_sprites.room")
+IncludeFile("ci_sprites.item")
+IncludeFile("ci_sprites.transformation")
